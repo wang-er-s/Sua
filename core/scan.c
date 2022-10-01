@@ -1,6 +1,7 @@
 #define extern_
 #include "data.h"
 #include "defs.h"
+#include <stdio.h>
 
 // get next character from the input file.
 static int next(void){
@@ -64,7 +65,7 @@ int scan(struct token *t){
     //
     switch (c)
     {
-    case EOF;
+    case EOF:
         return 0;
     case '+':
         t->token = T_PLUS;
