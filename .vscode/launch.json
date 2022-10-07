@@ -9,9 +9,9 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "/root/cProj/Sua",
+      "cwd": "/root/cProj/Sua/core",
       "environment": [],
-      "program": "/root/cProj/Sua/build/Debug/outDebug",
+      "program": "/root/cProj/Sua/core/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",

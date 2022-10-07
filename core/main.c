@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "defs.h"
 #define extern_
 #include "data.h"
@@ -10,17 +12,18 @@ static void init();
 static void usage(char *prog);
 static void scan_file();
 
-void main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
     if(argc != 2)
         usage(argv[0]);
 
     init();
-    if((Infile = fopen(argv[1], 'r')) == NULL){
+    if((Infile = fopen(argv[1],"r")) == NULL){
         fprintf(stderr, "unable to open %s: %s\n", argv[1], strerror(errno));
         exit(1);
     }
     scan_file();
     exit(0);    
+    return 1;
 }
 
 static void init(){
@@ -37,7 +40,7 @@ char *tok_str[] = {"+","-","*","/","intlit"};
 static void scan_file()
 {
     struct token t;
-    while(scan(&t))
+    while(scanf(&t))
     {
         printf("Token %s", tok_str[t.token]);
         if(t.token == T_INTLIT)
