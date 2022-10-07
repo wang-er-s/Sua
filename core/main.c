@@ -4,6 +4,7 @@
 #include "defs.h"
 #define extern_
 #include "data.h"
+#include "scan.h"
 #undef extern_
 #include <errno.h>
 
@@ -40,7 +41,7 @@ char *tok_str[] = {"+","-","*","/","intlit"};
 static void scan_file()
 {
     struct token t;
-    while(scanf(&t))
+    while(scan(&t))
     {
         printf("Token %s", tok_str[t.token]);
         if(t.token == T_INTLIT)

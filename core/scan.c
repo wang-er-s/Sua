@@ -1,7 +1,10 @@
 #define extern_
 #include "data.h"
 #include "defs.h"
+#include "scan.h"
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 // get next character from the input file.
 static int next(void){
@@ -80,7 +83,8 @@ int scan(struct token *t){
         t->token = T_SLASH;
     break;
     default:
-        if(is_digit(c)){
+        // 如果是10进制数字
+        if(isdigit(c)){
             t->int_value = scan_int(c);
             t->token = T_INTLIT;
         }
