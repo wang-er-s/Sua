@@ -39,12 +39,12 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="BinaryChunk.cs" />
+        <Compile Include="Chunk\BinaryChunk.cs" />
+        <Compile Include="Chunk\LuaConstant.cs" />
+        <Compile Include="Chunk\Reader.cs" />
         <Compile Include="ConstData.cs" />
-        <Compile Include="LuaConstant.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Reader.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
