@@ -23,5 +23,14 @@
         public const byte TAG_INTEGER = 0x13;
         public const byte TAG_SHORT_STR = 0x04;
         public const byte TAG_LONG_STR = 0x14;
+
+        /// <summary>
+        /// 18位bx的最大值
+        /// </summary>
+        public const int MaxBx = 1 << 18 - 1;
+        /// <summary>
+        /// 18位无符号bx的最大值的一半
+        /// </summary>
+        public const int MaxSBx = MaxBx / 2;
     }
 }
