@@ -61,7 +61,7 @@ namespace Sua
                     break;
             }
 
-            return $"{type}:{s}";
+            return $"{type} : {s}";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Sua
 {
@@ -52,6 +53,11 @@ namespace Sua
             // 读取函数原型
             result.MainFunc = reader.ReadProto(string.Empty);
             return result;
+        }
+
+        public override string ToString()
+        {
+            return MainFunc.ToString();
         }
     }
 
@@ -124,6 +130,26 @@ namespace Sua
         /// UpValue名列表
         /// </summary>
         public string[] UpValueNames;
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(
+                $"{nameof(Source)}: {Source}, {nameof(LineDefined)}: {LineDefined}, {nameof(LastLineDefined)}: {LastLineDefined}, {nameof(NumParams)}: {NumParams}");
+            sb.AppendLine();
+            sb.AppendLine($"{nameof(Constants)}: \n\t{string.Join<LuaConstant>("\n\t", Constants)}");
+            sb.AppendLine();
+            sb.AppendLine("UpValues");
+            for (int i = 0; i < UpValueNames.Length; i++)
+            {
+                sb.AppendLine($"\t{UpValueNames[i]}\t{UpValues[i].Idx}\t{UpValues[i].Instack}");
+            }
+            sb.AppendLine();
+            sb.AppendLine($"{nameof(LocVars)}:\n\t{string.Join("\n\t", LocVars)}");
+            sb.AppendLine();
+            sb.AppendLine($"\n{nameof(FuncProtoTypes)}:\n {string.Join<FuncProtoType>("\n", FuncProtoTypes)}");
+            return sb.ToString();
+        }
     }
 
     public class ChunkHeader

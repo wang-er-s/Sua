@@ -9,7 +9,7 @@ namespace Sua
         {
             var data = File.ReadAllBytes(@"E:\CSProject\Sua\Sua\Sample\luac.out");
             var chunk = BinaryChunk.UnDump(data);
-            Console.WriteLine(chunk);
+            Console.WriteLine(chunk.MainFunc);
         }
     }
 }
