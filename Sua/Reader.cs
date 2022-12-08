@@ -8,6 +8,11 @@ namespace Sua
         private byte[] data;
         private int curIndex = 0;
 
+        public Reader(byte[] data)
+        {
+            this.data = data;
+        }
+
         public byte ReadByte()
         {
             byte result = data[curIndex];
@@ -41,12 +46,10 @@ namespace Sua
         {
             return (long)ReadUint64();
         }
-        
+
         public long ReadLuaNumber()
         {
-            long result = BitConverter.ToInt64(data, curIndex);
-            curIndex += sizeof(long);
-            return result;
+            return (long)ReadUint64();
         }
 
         public string ReadString()
@@ -217,10 +220,10 @@ namespace Sua
             }
 
             header.LuacNum = ReadLuaNumber();
-            if (Math.Abs(header.LuacNum - ConstData.LuacNum) > 0.0001f)
-            {
-                throw new Exception("luac num不对");
-            }
+            // if (Math.Abs(header.LuacNum - ConstData.LuacNum) > 0.0001f)
+            // {
+            //     throw new Exception("luac num不对");
+            // }
 
             return header;
         }
@@ -274,27 +277,25 @@ namespace Sua
 
             return result;
         }
-        
+
         public FuncProtoType ReadProto(string parentSource)
         {
             var source = ReadString();
             if (string.IsNullOrEmpty(source)) source = parentSource;
-            FuncProtoType protoType = new FuncProtoType()
-            {
-                Source = source,
-                LineDefined = ReadUint32(),
-                LastLineDefined = ReadUint32(),
-                NumParams = ReadByte(),
-                IsVararg = ReadByte(),
-                MaxStackSize = ReadByte(),
-                Code = ReadCode(),
-                Constants = ReadConstants(),
-                UpValues = ReadUpValues(),
-                Protos = ReadProtos(source),
-                LineInfo = ReadLineInfo(),
-                LocVars = ReadLocVars(),
-                UpValueNames = ReadUpValueNames()
-            };
+            FuncProtoType protoType = new FuncProtoType();
+            protoType.Source = source;
+            protoType.LineDefined = ReadUint32();
+            protoType.LastLineDefined = ReadUint32();
+            protoType.NumParams = ReadByte();
+            protoType.IsVararg = ReadByte();
+            protoType.MaxStackSize = ReadByte();
+            protoType.Code = ReadCode();
+            protoType.Constants = ReadConstants();
+            protoType.UpValues = ReadUpValues();
+            protoType.FuncProtoTypes = ReadProtos(source);
+            protoType.LineInfo = ReadLineInfo();
+            protoType.LocVars = ReadLocVars();
+            protoType.UpValueNames = ReadUpValueNames();
             return protoType;
         }
 

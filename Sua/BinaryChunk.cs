@@ -24,12 +24,35 @@ namespace Sua
         /// 截止指令索引
         /// </summary>
         public uint EndPC;
+
+        public override string ToString()
+        {
+            return VarName;
+        }
     }
 
     public class BinaryChunk
     {
-        public ChunkHeader ChunkHeader;
-        public Action MainFunc;
+        public ChunkHeader ChunkHeader { get; private set; }
+        public byte UpValueSize { get; private set; }
+        public FuncProtoType MainFunc { get; private set; }
+
+        private BinaryChunk()
+        {
+        }
+
+        public static BinaryChunk UnDump(byte[] data)
+        {
+            BinaryChunk result = new BinaryChunk();
+            Reader reader = new Reader(data);
+            // 校验头部
+            result.ChunkHeader = reader.CheckHeader();
+            // 跳过UpValue数量
+            result.UpValueSize = reader.ReadByte();
+            // 读取函数原型
+            result.MainFunc = reader.ReadProto(string.Empty);
+            return result;
+        }
     }
 
     /// <summary>
@@ -80,7 +103,7 @@ namespace Sua
         /// <summary>
         /// 子函数原型表
         /// </summary>
-        public FuncProtoType[] Protos;
+        public FuncProtoType[] FuncProtoTypes;
 
         /// <summary>
         /// UpValue表

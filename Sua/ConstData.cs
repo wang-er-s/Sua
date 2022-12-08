@@ -14,7 +14,8 @@
         public const byte LuaIntegerSize = 8;
         public const byte LuaNumberSize = 8;
         public const long LuacInt = 0x5678;
-        public const double LuacNum = 370.5;
+        // 370.5
+        public const double LuacNum = 4.64522;
 
         public const byte TAG_NIL = 0x00;
         public const byte TAG_BOOLEAN = 0x01;
