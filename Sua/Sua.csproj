@@ -39,12 +39,19 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Api\LuaType.cs" />
         <Compile Include="Chunk\BinaryChunk.cs" />
         <Compile Include="Chunk\LuaConstant.cs" />
         <Compile Include="Chunk\Reader.cs" />
         <Compile Include="ConstData.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="State\LuaStack.cs" />
+        <Compile Include="State\LuaState.cs" />
+        <Compile Include="State\LuaState\LuaState_Access.cs" />
+        <Compile Include="State\LuaState\LuaState_PushValue.cs" />
+        <Compile Include="State\LuaState\LuaState_Stack.cs" />
+        <Compile Include="State\LuaValue.cs" />
         <Compile Include="VM\Instruction.cs" />
         <Compile Include="VM\InstructionTable.cs" />
         <Compile Include="VM\Opcode.cs" />

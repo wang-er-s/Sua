@@ -7,7 +7,7 @@ namespace Sua
     {
         public static void Main(string[] args)
         {
-            TestInstruction();
+            TestLuaState();
         }
 
         private static void TestChunk()
@@ -25,6 +25,25 @@ namespace Sua
             {
                 Console.WriteLine(new Instruction(u));
             }
+        }
+
+        private static void TestLuaState()
+        {
+            LuaState luaState = new LuaState();
+            luaState.PushBool(true);
+            luaState.PushInteger(10);
+            luaState.PushNil();
+            luaState.PushString("hello");
+            luaState.CopyAndPush(-4);
+            luaState.LuaStack.Print();
+            luaState.PopAndReplace(3);
+            luaState.LuaStack.Print();
+            luaState.SetTop(6);
+            luaState.LuaStack.Print();
+            luaState.RemoveAt(-3);
+            luaState.LuaStack.Print();
+            luaState.SetTop(-5);
+            luaState.LuaStack.Print();
         }
     }
 }
