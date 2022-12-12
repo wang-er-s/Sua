@@ -21,6 +21,40 @@ namespace Sua
             this.StrVal = str;
         }
 
+        public bool TryToFloat(out double val)
+        {
+            val = 0;
+            switch (Type)
+            {
+                case LuaType.Number:
+                    val = Int64Val == default ? Float64Val : Int64Val;
+                    return true;
+                case LuaType.String:
+                    return double.TryParse(StrVal, out val);
+                default:
+                    return false;
+            }
+        }
+        
+        public bool TryToInteger(out long val)
+        {
+            val = 0;
+            switch (Type)
+            {
+                case LuaType.Number:
+                    if (Int64Val != default)
+                    {
+                        val = Int64Val;
+                        return true;
+                    }
+                    return MathF.Float2Integer(Float64Val, out val);
+                case LuaType.String:
+                    return long.TryParse(StrVal, out val);
+                default:
+                    return false;
+            }
+        }
+
         public override string ToString()
         {
             switch (Type)

@@ -57,21 +57,7 @@ namespace Sua
         public bool ToNumberX(int index, out double value)
         {
             var val = LuaStack[index];
-            value = 0;
-            if (val.Type != LuaType.Number) return false;
-            if (Math.Abs(val.Float64Val - default(double)) > 0.0001f)
-            {
-                value = val.Float64Val;
-                return true;
-            }
-
-            if (val.Int64Val != default)
-            {
-                value = val.Int64Val;
-                return true;
-            }
-
-            return false;
+            return val.TryToFloat(out value);
         }
 
         public bool IsInteger(int index)
@@ -88,15 +74,7 @@ namespace Sua
         public bool ToIntegerX(int index, out long value)
         {
             var val = LuaStack[index];
-            value = 0;
-            if (val.Type != LuaType.Number) return false;
-            if (val.Int64Val != default)
-            {
-                value = val.Int64Val;
-                return true;
-            }
-
-            return false;
+            return val.TryToInteger(out value);
         }
 
         public bool ToBoolean(int index)

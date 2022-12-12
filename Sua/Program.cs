@@ -7,7 +7,10 @@ namespace Sua
     {
         public static void Main(string[] args)
         {
-            TestLuaState();
+            double d1 = 3;
+            MathF.Float2Integer(d1, out var l);
+            Console.WriteLine(d1);
+            Console.WriteLine(l);
         }
 
         private static void TestChunk()

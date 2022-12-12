@@ -44,11 +44,13 @@
         <Compile Include="Chunk\LuaConstant.cs" />
         <Compile Include="Chunk\Reader.cs" />
         <Compile Include="ConstData.cs" />
+        <Compile Include="Number\Math.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="State\LuaStack.cs" />
         <Compile Include="State\LuaState.cs" />
         <Compile Include="State\LuaState\LuaState_Access.cs" />
+        <Compile Include="State\LuaState\LuaState_Calc.cs" />
         <Compile Include="State\LuaState\LuaState_PushValue.cs" />
         <Compile Include="State\LuaState\LuaState_Stack.cs" />
         <Compile Include="State\LuaValue.cs" />
