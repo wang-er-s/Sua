@@ -7,6 +7,7 @@
         Bool,
         LightUserData,
         Number,
+        Integer,
         String,
         Table,
         Function,

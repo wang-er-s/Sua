@@ -72,23 +72,17 @@ namespace Sua
                 return ShiftLeft(num, count);
             }
         }
-
-        public static bool Float2Integer(double d, out long val)
-        {
-            val = (long)d;
-            return Math.Abs(val - d) < 0.00001f;
-        }
     }
 
     /// <summary>
     /// lua的运算符
     /// </summary>
-    public enum LuaOperator
+    public enum LuaCalcOperator
     {
         Add,
         Sub,
         Mul,
-        Dic,
+        Div,
         // %
         Mod,
         Pow,
@@ -103,8 +97,14 @@ namespace Sua
         ShL,
         // >>
         ShR,
-        // 一目减法 ？？
+        // -a 
         UNm,
+        // ^a
+        BNot,
+    }
+
+    public enum LuaCompareOperator
+    {
         Equal,
         LessThan,
         LessEqual

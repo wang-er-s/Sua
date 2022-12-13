@@ -34,8 +34,6 @@ namespace Sua
             return GetLuaType(index) == LuaType.Bool;
         }
 
-
-
         public bool IsNumber(int index)
         {
             return ToNumberX(index, out _);
@@ -95,7 +93,7 @@ namespace Sua
         public bool IsString(int index)
         {
             var t = GetLuaType(index);
-            return t == LuaType.String || t == LuaType.Number;
+            return t == LuaType.String || t == LuaType.Number || t == LuaType.Integer;
         }
 
         public string ToString(int index)
@@ -111,10 +109,9 @@ namespace Sua
             switch (val.Type)
             {
                 case LuaType.String:
-                    str = val.StrVal;
-                    return true;
                 case LuaType.Number:
-                    str = val.Int64Val == 0 ? val.Float64Val.ToString(".00") : val.Int64Val.ToString();
+                case LuaType.Integer:
+                    str = val.LuaToString();
                     return true;
                 default:
                     return false;

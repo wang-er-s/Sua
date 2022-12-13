@@ -7,10 +7,8 @@ namespace Sua
     {
         public static void Main(string[] args)
         {
-            double d1 = 3;
-            MathF.Float2Integer(d1, out var l);
-            Console.WriteLine(d1);
-            Console.WriteLine(l);
+            TestLuaStateCalc();
+            // TestLuaState();
         }
 
         private static void TestChunk()
@@ -47,6 +45,27 @@ namespace Sua
             luaState.LuaStack.Print();
             luaState.SetTop(-5);
             luaState.LuaStack.Print();
+        }
+
+        private static void TestLuaStateCalc()
+        {
+            LuaState ls = new LuaState();
+            ls.PushInteger(1);
+            ls.PushString("2.0");
+            ls.PushString("3.0");
+            ls.PushNumber(4.0);
+            ls.LuaStack.Print();
+            
+            ls.Arith(LuaCalcOperator.Add);
+            ls.LuaStack.Print();
+            ls.Arith(LuaCalcOperator.UNm);
+            ls.LuaStack.Print();
+            ls.StrLen(2);
+            ls.LuaStack.Print();
+            ls.StrConcat(3);
+            ls.LuaStack.Print();
+            ls.PushBool(ls.Compare(1,2, LuaCompareOperator.Equal));
+            ls.LuaStack.Print();
         }
     }
 }

@@ -14,7 +14,7 @@
 
         public void PushInteger(long l)
         {
-            LuaStack.Push(new LuaValue(LuaType.Number, int64: l));
+            LuaStack.Push(new LuaValue(LuaType.Integer, int64: l));
         }
 
         public void PushNumber(double d)

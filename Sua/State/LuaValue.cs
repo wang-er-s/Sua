@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Sua
 {
@@ -27,7 +28,10 @@ namespace Sua
             switch (Type)
             {
                 case LuaType.Number:
-                    val = Int64Val == default ? Float64Val : Int64Val;
+                    val = Float64Val;
+                    return true;
+                case LuaType.Integer:
+                    val = Int64Val;
                     return true;
                 case LuaType.String:
                     return double.TryParse(StrVal, out val);
@@ -42,12 +46,11 @@ namespace Sua
             switch (Type)
             {
                 case LuaType.Number:
-                    if (Int64Val != default)
-                    {
-                        val = Int64Val;
-                        return true;
-                    }
-                    return MathF.Float2Integer(Float64Val, out val);
+                    val = (long)Float64Val;
+                    return true;
+                case LuaType.Integer:
+                    val = Int64Val;
+                    return true;
                 case LuaType.String:
                     return long.TryParse(StrVal, out val);
                 default:
@@ -55,7 +58,7 @@ namespace Sua
             }
         }
 
-        public override string ToString()
+        public string LuaToString()
         {
             switch (Type)
             {
@@ -70,10 +73,37 @@ namespace Sua
                 case LuaType.Bool:
                     return BoolVal.ToString();
                 case LuaType.Number:
-                    if (Int64Val != 0) return Int64Val.ToString();
-                    return Float64Val.ToString(".00");
+                    return Float64Val.ToString(CultureInfo.InvariantCulture);
+                case LuaType.Integer:
+                    return Int64Val.ToString();
                 case LuaType.String:
                     return StrVal;
+                case LuaType.Table:
+                    return "";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public override string ToString()
+        {
+            switch (Type)
+            {
+                case LuaType.None:
+                case LuaType.Nil:
+                case LuaType.LightUserData:
+                case LuaType.UserData:
+                case LuaType.Thread:
+                case LuaType.Function:
+                    return Type.ToString();
+                case LuaType.Bool:
+                    return BoolVal.ToString();
+                case LuaType.Number:
+                    return Float64Val.ToString(".00");
+                case LuaType.Integer:
+                    return Int64Val.ToString();
+                case LuaType.String:
+                    return $"\"{StrVal}\"";
                 case LuaType.Table:
                     return "";
                 default:

@@ -66,7 +66,7 @@ namespace Sua
         public bool IsValidIndex(int index)
         {
             index = AbsIndex(index);
-            return index < TopIndex && index >= 0;
+            return index <= TopIndex && index > 0;
         }
 
         /// <summary>
